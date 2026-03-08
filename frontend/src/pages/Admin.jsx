@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+// eslint-disable-next-line
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ProjectList, { ProjectListSkeleton } from '../components/admin/ProjectList';
 import ProjectForm from '../components/admin/ProjectForm';

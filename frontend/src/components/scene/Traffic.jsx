@@ -60,12 +60,13 @@ export default function Traffic() {
           w = 0.1; // Width
         }
 
-        streaksData.push(
-          <mesh key={`${axis}-${i}`} position={[x, y, z]} userData={{ speed }}>
-            <boxGeometry args={[w, 0.01, d]} />
-            <meshBasicMaterial color={color} />
-          </mesh>
-        );
+        streaksData.push({
+          id: `${axis}-${i}`,
+          x, y, z,
+          speed,
+          w, d,
+          color
+        });
       }
       return streaksData;
     };
@@ -78,8 +79,22 @@ export default function Traffic() {
 
   return (
     <group>
-      <group ref={xStreaksRef}>{xStreaks}</group>
-      <group ref={zStreaksRef}>{zStreaks}</group>
+      <group ref={xStreaksRef}>
+        {xStreaks.map((s) => (
+          <mesh key={s.id} position={[s.x, s.y, s.z]} userData={{ speed: s.speed }}>
+            <boxGeometry args={[s.w, 0.01, s.d]} />
+            <meshBasicMaterial color={s.color} />
+          </mesh>
+        ))}
+      </group>
+      <group ref={zStreaksRef}>
+        {zStreaks.map((s) => (
+          <mesh key={s.id} position={[s.x, s.y, s.z]} userData={{ speed: s.speed }}>
+            <boxGeometry args={[s.w, 0.01, s.d]} />
+            <meshBasicMaterial color={s.color} />
+          </mesh>
+        ))}
+      </group>
     </group>
   );
 }

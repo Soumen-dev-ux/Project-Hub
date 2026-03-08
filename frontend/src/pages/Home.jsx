@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import React from 'react';
+// eslint-disable-next-line
+import { motion } from 'framer-motion';
 import CityScene from '../components/scene/CityScene';
 import ProjectPanel from '../components/ui/ProjectPanel';
 import Loader from '../components/ui/Loader';
