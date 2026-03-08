@@ -1,10 +1,13 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import { Stars } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import Building from './Building';
 import Ground from './Ground';
 import Lights from './Lights';
 import CameraRig from './CameraRig';
+import Traffic from './Traffic';
+import FlyingCars from './FlyingCars';
 
 // Seeded particle positions so they don't change on re-render
 const PARTICLES = Array.from({ length: 25 }, (_, i) => {
@@ -61,6 +64,13 @@ export default function CityScene({ projects, onBuildingClick, selectedProject, 
           <meshBasicMaterial color={p.color} />
         </mesh>
       ))}
+
+      <Traffic />
+      <FlyingCars />
+
+      <EffectComposer disableNormalPass>
+        <Bloom luminanceThreshold={0.4} mipmapBlur intensity={0.8} />
+      </EffectComposer>
     </Canvas>
   );
 }

@@ -20,14 +20,15 @@ function TechBadge({ tech }) {
       animate={{ opacity: 1, scale: 1 }}
       style={{
         display: 'inline-flex', alignItems: 'center',
-        padding: '4px 11px', borderRadius: 9999,
-        fontSize: '0.68rem', fontWeight: 700,
-        letterSpacing: '0.04em',
-        fontFamily: 'JetBrains Mono, monospace',
-        background: `${color}18`,
-        border: `1px solid ${color}55`,
-        color: color,
-        margin: 3,
+        padding: '5px 12px', borderRadius: 12,
+        fontSize: '0.65rem', fontWeight: 600,
+        letterSpacing: '0.05em',
+        fontFamily: 'Inter, sans-serif',
+        background: `linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))`,
+        border: `1px solid rgba(255,255,255,0.1)`,
+        color: '#fff',
+        boxShadow: `0 2px 8px rgba(0,0,0,0.2)`,
+        margin: 4,
       }}
     >
       {tech}
@@ -67,11 +68,10 @@ export default function ProjectPanel({ project, onClose }) {
               zIndex: 30,
               borderRadius: 22,
               overflow: 'hidden',
-              background: 'rgba(8, 12, 26, 0.92)',
-              backdropFilter: 'blur(36px) saturate(200%)',
-              border: '1px solid rgba(0, 245, 255, 0.22)',
-              boxShadow:
-                '0 0 0 1px rgba(0,245,255,0.06), 0 0 80px rgba(0,245,255,0.15), 0 50px 100px rgba(0,0,0,0.8)',
+              background: 'rgba(8, 12, 26, 0.85)',
+              backdropFilter: 'blur(40px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.6)',
             }}
           >
             {/* ── Image header ─────────────────────────── */}
@@ -113,10 +113,10 @@ export default function ProjectPanel({ project, onClose }) {
                   whileTap={{ scale: 0.9 }}
                   onClick={onClose}
                   style={{
-                    width: 34, height: 34, borderRadius: '50%',
-                    background: 'rgba(8,12,26,0.85)',
-                    border: '1px solid rgba(255,0,170,0.35)',
-                    color: '#ff00aa', fontSize: '1.1rem',
+                    width: 32, height: 32, borderRadius: '50%',
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    color: '#fff', fontSize: '1.2rem',
                     cursor: 'pointer', display: 'flex',
                     alignItems: 'center', justifyContent: 'center',
                     lineHeight: 1,
@@ -133,11 +133,12 @@ export default function ProjectPanel({ project, onClose }) {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-orbitron gradient-text"
+                className="font-inter"
                 style={{
-                  fontSize: 'clamp(1.05rem, 3vw, 1.3rem)',
-                  fontWeight: 800, marginBottom: 10,
-                  paddingTop: 4,
+                  fontSize: 'clamp(1.1rem, 3.5vw, 1.4rem)',
+                  fontWeight: 700, marginBottom: 8,
+                  paddingTop: 4, color: '#fff',
+                  letterSpacing: '-0.02em',
                 }}
               >
                 {project.title}
@@ -188,10 +189,10 @@ export default function ProjectPanel({ project, onClose }) {
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6,
                   padding: '7px 14px', borderRadius: 8,
-                  background: 'rgba(0,245,255,0.04)',
-                  border: '1px solid rgba(0,245,255,0.12)',
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.08)',
                   fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '0.72rem', color: 'rgba(0,245,255,0.5)',
+                  fontSize: '0.72rem', color: 'rgba(226,232,240,0.7)',
                   marginBottom: 22,
                 }}
               >
@@ -216,9 +217,9 @@ export default function ProjectPanel({ project, onClose }) {
                       whileTap={{ scale: 0.97 }}
                       style={{
                         width: '100%', padding: '11px 16px',
-                        borderRadius: 11, background: 'transparent',
-                        border: '1px solid rgba(0,245,255,0.35)',
-                        color: '#00f5ff', cursor: 'pointer',
+                        borderRadius: 11, background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        color: '#fff', cursor: 'pointer',
                         fontSize: '0.8rem', fontWeight: 600,
                         letterSpacing: '0.04em', fontFamily: 'Inter, sans-serif',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
@@ -243,9 +244,9 @@ export default function ProjectPanel({ project, onClose }) {
                       style={{
                         width: '100%', padding: '11px 16px',
                         borderRadius: 11,
-                        background: 'linear-gradient(135deg, rgba(0,245,255,0.12), rgba(144,0,255,0.12))',
-                        border: '1px solid rgba(144,0,255,0.4)',
-                        color: '#c084fc', cursor: 'pointer',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.1))',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        color: '#fff', cursor: 'pointer',
                         fontSize: '0.8rem', fontWeight: 600,
                         letterSpacing: '0.04em', fontFamily: 'Inter, sans-serif',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,

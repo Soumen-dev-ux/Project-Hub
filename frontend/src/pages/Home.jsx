@@ -95,16 +95,16 @@ export default function Home() {
           style={{
             position: 'fixed', bottom: 24, left: 24,
             padding: '12px 20px', borderRadius: 12,
-            background: 'rgba(10,15,30,0.75)',
-            backdropFilter: 'blur(16px)',
-            border: '1px solid rgba(0,245,255,0.15)',
+            background: 'rgba(8, 12, 26, 0.7)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.08)',
             pointerEvents: 'none',
           }}
         >
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '0.65rem', color: 'rgba(0,245,255,0.5)', marginBottom: 4 }}>
+          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', marginBottom: 4 }}>
             PROJECTS ONLINE
           </div>
-          <div className="font-orbitron" style={{ fontSize: '1.5rem', color: '#00f5ff', fontWeight: 700 }}>
+          <div className="font-orbitron" style={{ fontSize: '1.5rem', color: '#fff', fontWeight: 700 }}>
             {projects.length.toString().padStart(2, '0')}
           </div>
         </motion.div>
@@ -119,9 +119,9 @@ export default function Home() {
             style={{
               position: 'fixed', bottom: 24, right: 24,
               padding: '12px 16px', borderRadius: 12,
-              background: 'rgba(10,15,30,0.75)',
-              backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255,0,170,0.15)',
+              background: 'rgba(8, 12, 26, 0.7)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255,255,255,0.08)',
               fontFamily: 'JetBrains Mono', fontSize: '0.68rem',
               color: 'rgba(226,232,240,0.4)',
               lineHeight: 1.8, pointerEvents: 'none',

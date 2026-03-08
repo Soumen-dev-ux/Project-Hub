@@ -1,0 +1,78 @@
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
+
+// Glowing light streaks moving along the X and Z axes
+export default function Traffic() {
+  const xStreaksRef = useRef();
+  const zStreaksRef = useRef();
+
+  useFrame((state, delta) => {
+    if (xStreaksRef.current) {
+      // Move streaks along X
+      xStreaksRef.current.children.forEach((child) => {
+        child.position.x += child.userData.speed * delta;
+        if (child.userData.speed > 0 && child.position.x > 100) {
+          child.position.x = -100;
+        } else if (child.userData.speed < 0 && child.position.x < -100) {
+          child.position.x = 100;
+        }
+      });
+    }
+
+    if (zStreaksRef.current) {
+      // Move streaks along Z
+      zStreaksRef.current.children.forEach((child) => {
+        child.position.z += child.userData.speed * delta;
+        if (child.userData.speed > 0 && child.position.z > 100) {
+          child.position.z = -100;
+        } else if (child.userData.speed < 0 && child.position.z < -100) {
+          child.position.z = 100;
+        }
+      });
+    }
+  });
+
+  // Generate random streaks
+  const generateStreaks = (count, axis) => {
+    const streaks = [];
+    for (let i = 0; i < count; i++) {
+      const isPositive = Math.random() > 0.5;
+      const speed = (Math.random() * 15 + 10) * (isPositive ? 1 : -1);
+
+      let x = 0, y = 0.05, z = 0;
+      let w = 0.1, d = 0.1;
+
+      const color = Math.random() > 0.5 ? '#00f5ff' : '#ff00aa';
+
+      if (axis === 'x') {
+        // X-axis traffic
+        x = (Math.random() - 0.5) * 200;
+        // Align with Z road strips (approx at z = -4, 0, 4) or adjacent
+        z = [-5, -4, -3, 3, 4, 5][Math.floor(Math.random() * 6)] + (Math.random() * 0.5 - 0.25);
+        w = Math.random() * 3 + 1; // Length of the streak
+        d = 0.1; // Width
+      } else {
+        // Z-axis traffic
+        z = (Math.random() - 0.5) * 200;
+        x = [-5, -4, -3, 3, 4, 5][Math.floor(Math.random() * 6)] + (Math.random() * 0.5 - 0.25);
+        d = Math.random() * 3 + 1; // Length
+        w = 0.1; // Width
+      }
+
+      streaks.push(
+        <mesh key={`${axis}-${i}`} position={[x, y, z]} userData={{ speed }}>
+          <boxGeometry args={[w, 0.01, d]} />
+          <meshBasicMaterial color={color} />
+        </mesh>
+      );
+    }
+    return streaks;
+  };
+
+  return (
+    <group>
+      <group ref={xStreaksRef}>{generateStreaks(40, 'x')}</group>
+      <group ref={zStreaksRef}>{generateStreaks(40, 'z')}</group>
+    </group>
+  );
+}

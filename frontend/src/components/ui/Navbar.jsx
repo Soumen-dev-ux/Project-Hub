@@ -9,7 +9,12 @@ export default function Navbar() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="nav-container glass glow-cyan"
+      className="nav-container glass"
+      style={{
+        background: 'rgba(8, 12, 26, 0.6)',
+        backdropFilter: 'blur(24px)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)'
+      }}
     >
       {/* Logo */}
       <Link to="/" style={{ textDecoration: 'none' }}>

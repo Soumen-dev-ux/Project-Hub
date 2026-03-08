@@ -2,13 +2,14 @@ import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 
-// Animated grid ref for subtle pulse
+// Animated grid ref for subtle pulse and tech-metro scrolling
 function AnimatedGrid() {
   const ref = useRef();
   useFrame((state) => {
     if (ref.current) {
+      // Pulse opacity
       ref.current.material.opacity =
-        0.12 + Math.sin(state.clock.elapsedTime * 0.4) * 0.04;
+        0.15 + Math.sin(state.clock.elapsedTime * 2) * 0.08;
     }
   });
   return (
@@ -28,14 +29,16 @@ export default function Ground() {
         <planeGeometry args={[200, 200]} />
         <meshStandardMaterial
           color="#020408"
-          metalness={0.95}
-          roughness={0.12}
+          metalness={0.98}
+          roughness={0.05}
           envMapIntensity={0.5}
         />
       </mesh>
 
       {/* Animated cyan grid */}
       <AnimatedGrid />
+      {/* Static pink sub-grid */}
+      <gridHelper args={[200, 40, '#ff00aa', '#ff00aa']} position={[0, 0.005, 0]} material-opacity={0.05} material-transparent />
 
       {/* Subtle road strips — X axis */}
       {[-4, 0, 4].map((x, i) => (

@@ -108,7 +108,7 @@ export default function Building({ project, onClick, isSelected }) {
 
     // Smooth emissive intensity lerp on shared material
     if (materialRef.current) {
-      const targetIntensity = isSelected ? 3.5 : hovered ? 2.2 : 0.35;
+      const targetIntensity = isSelected ? 4.0 : hovered ? 2.0 : 0.8;
       materialRef.current.emissiveIntensity +=
         (targetIntensity - materialRef.current.emissiveIntensity) * 0.07;
     }
@@ -155,7 +155,7 @@ export default function Building({ project, onClick, isSelected }) {
           ref={materialRef}
           color={palette.base}
           emissive={emissiveCol}
-          emissiveIntensity={0.35}
+          emissiveIntensity={0.8}
           emissiveMap={WINDOW_TEX}
           map={WINDOW_TEX}
           metalness={0.85}
@@ -182,6 +182,12 @@ export default function Building({ project, onClick, isSelected }) {
         <mesh ref={glowRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
           <ringGeometry args={[ringR * 0.7, ringR * 1.55, 32]} />
           <meshBasicMaterial color={palette.emissive} transparent opacity={0} />
+        </mesh>
+
+        {/* ── Hologram detail ring ─────────────────────────────── */}
+        <mesh position={[0, height * 0.8, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[Math.max(width, depth) * 1.2, Math.max(width, depth) * 1.25, 32]} />
+          <meshBasicMaterial color={palette.emissive} transparent opacity={0.2} side={2} />
         </mesh>
 
         {/* ── Rooftop accent light ─────────────────────────────── */}
