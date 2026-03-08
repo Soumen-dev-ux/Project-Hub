@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 
 export default function FlyingCars() {
   const carsRef = useRef();
 
   // Generate initial flying cars
-  const carData = Array.from({ length: 15 }, (_, i) => {
+  const [carData] = useState(() => Array.from({ length: 15 }, (_, i) => {
     // Random height between 3 and 15
     const y = Math.random() * 12 + 3;
     const isX = Math.random() > 0.5;
@@ -33,7 +33,7 @@ export default function FlyingCars() {
       color,
       offset: Math.random() * Math.PI * 2, // For subtle bobbing
     };
-  });
+  }));
 
   useFrame((state, delta) => {
     if (!carsRef.current) return;

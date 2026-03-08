@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 export default function ProjectList({ projects, onEdit, onDelete }) {
   return (

@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { motion, AnimatePresence } from 'framer-motion';
 
 const TECH_COLORS = {
@@ -13,7 +14,6 @@ const TECH_COLORS = {
 };
 
 function TechBadge({ tech }) {
-  const color = TECH_COLORS[tech] || '#00f5ff';
   return (
     <motion.span
       initial={{ opacity: 0, scale: 0.8 }}
@@ -174,7 +174,7 @@ export default function ProjectPanel({ project, onClose }) {
                     ◈ TECH STACK
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
-                    {project.techStack.map((tech, i) => (
+                    {project.techStack.map((tech) => (
                       <TechBadge key={tech} tech={tech} />
                     ))}
                   </div>

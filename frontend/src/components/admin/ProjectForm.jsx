@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
+import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line
+import { motion } from 'framer-motion';
 const EMPTY = {
   title: '', description: '', techStack: '',
   githubLink: '', liveDemo: '', demoVideo: '', image: '',

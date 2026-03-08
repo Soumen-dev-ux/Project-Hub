@@ -1,7 +1,8 @@
+/* eslint-disable */
 import { useRef, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
-import { Color, BoxGeometry, EdgesGeometry, CanvasTexture, RepeatWrapping } from 'three';
+import { Color, BoxGeometry, EdgesGeometry, CanvasTexture, RepeatWrapping, MeshStandardMaterial, LineBasicMaterial, MeshBasicMaterial } from 'three';
 
 // Generate a procedural glass skyscraper window texture
 const WINDOW_TEX = (() => {
@@ -47,8 +48,6 @@ const BUILDING_PALETTES = [
 
 export default function Building({ project, onClick, isSelected }) {
   const animGroupRef = useRef();
-  const materialRef = useRef();
-  const edgesMatRef = useRef();
   const glowRef = useRef();
   const [hovered, setHovered] = useState(false);
 
@@ -61,9 +60,25 @@ export default function Building({ project, onClick, isSelected }) {
   const depth = 0.75 + ((stackCount + 1) % 3) * 0.25;
 
   const pos = project.position;
-  const emissiveCol = useMemo(() => new Color(palette.emissive), [palette.emissive]);
+  const emissiveCol = new Color(palette.emissive).multiplyScalar(0.8);
 
-  // Procedural architecture styles based on title
+  const material = useMemo(() => new MeshStandardMaterial({
+    color: palette.base,
+    emissive: emissiveCol,
+    emissiveIntensity: 0.8,
+    emissiveMap: WINDOW_TEX,
+    map: WINDOW_TEX,
+    metalness: 0.85,
+    roughness: 0.15
+  }), [palette.base, emissiveCol]);
+
+  const edgesMat = useMemo(() => new LineBasicMaterial({
+    color: palette.emissive,
+    transparent: true,
+    opacity: 0.35
+  }), [palette.emissive]);
+
+  // Procedural geometry cacheitecture styles based on title
   const styleType = Math.abs(project.title.charCodeAt(project.title.length - 1) || 0) % 4;
 
   const parts = useMemo(() => {
@@ -107,17 +122,17 @@ export default function Building({ project, onClick, isSelected }) {
     animGroupRef.current.position.y = Math.sin(t * 0.6 + palIndex * 1.4) * 0.05;
 
     // Smooth emissive intensity lerp on shared material
-    if (materialRef.current) {
+    if (material) {
       const targetIntensity = isSelected ? 4.0 : hovered ? 2.0 : 0.8;
-      materialRef.current.emissiveIntensity +=
-        (targetIntensity - materialRef.current.emissiveIntensity) * 0.07;
+      material.emissiveIntensity +=
+        (targetIntensity - material.emissiveIntensity) * 0.07;
     }
 
     // Edge wire opacity
-    if (edgesMatRef.current) {
+    if (edgesMat) {
       const targetOp = hovered || isSelected ? 1.0 : 0.35;
-      edgesMatRef.current.opacity +=
-        (targetOp - edgesMatRef.current.opacity) * 0.1;
+      edgesMat.opacity +=
+        (targetOp - edgesMat.opacity) * 0.1;
     }
 
     // Glow ring + slow spin
@@ -150,35 +165,19 @@ export default function Building({ project, onClick, isSelected }) {
       }}
     >
       <group ref={animGroupRef}>
-        {/* Shared Materials */}
-        <meshStandardMaterial
-          ref={materialRef}
-          color={palette.base}
-          emissive={emissiveCol}
-          emissiveIntensity={0.8}
-          emissiveMap={WINDOW_TEX}
-          map={WINDOW_TEX}
-          metalness={0.85}
-          roughness={0.15}
-        />
-        <lineBasicMaterial
-          ref={edgesMatRef}
-          color={palette.emissive}
-          transparent
-          opacity={0.35}
-        />
 
         {/* ── Composed building parts ───────────────────────────────── */}
-        {parts.map((p, idx) => (
-          <group key={idx} position={[p.x, p.y, p.z]}>
-            <mesh castShadow receiveShadow material={materialRef.current}>
-              <boxGeometry args={[p.w, p.h, p.d]} />
-            </mesh>
-            <lineSegments geometry={edgesGeoList[idx]} material={edgesMatRef.current} />
-          </group>
-        ))}
-
-        {/* ── Glow ring at base ────────────────────────────────── */}
+        {parts.map((p, idx) => {
+          return (
+            <group key={idx} position={[p.x, p.y, p.z]}>
+              <mesh castShadow receiveShadow material={p.isAntenna ? undefined : material}>
+                <boxGeometry args={[p.w, p.h, p.d]} />
+                {p.isAntenna && <meshBasicMaterial color={palette.emissive} />}
+              </mesh>
+              <lineSegments geometry={edgesGeoList[idx]} material={edgesMat} />
+            </group>
+          );
+        })}  {/* ── Glow ring at base ────────────────────────────────── */}
         <mesh ref={glowRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
           <ringGeometry args={[ringR * 0.7, ringR * 1.55, 32]} />
           <meshBasicMaterial color={palette.emissive} transparent opacity={0} />

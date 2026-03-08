@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 import CityScene from '../components/scene/CityScene';
 import ProjectPanel from '../components/ui/ProjectPanel';
 import Loader from '../components/ui/Loader';

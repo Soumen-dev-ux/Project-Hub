@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ProjectList, { ProjectListSkeleton } from '../components/admin/ProjectList';
 import ProjectForm from '../components/admin/ProjectForm';
