@@ -31,7 +31,6 @@ export default function Navbar() {
       <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
         {[
           { label: 'City', to: '/' },
-          { label: 'Admin', to: '/admin' },
         ].map(({ label, to }) => {
           const active = pathname === to;
           return (
