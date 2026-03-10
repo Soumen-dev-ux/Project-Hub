@@ -5,6 +5,7 @@ import CityScene from '../components/scene/CityScene';
 import ProjectPanel from '../components/ui/ProjectPanel';
 import Loader from '../components/ui/Loader';
 import { useProjects } from '../hooks/useProjects';
+import WelcomePopup from '../components/ui/WelcomePopup';
 
 export default function Home() {
   const { projects, loading, error } = useProjects();
@@ -159,6 +160,9 @@ export default function Home() {
 
       {/* Project Panel — slides in from right, has its own pointer-events */}
       <ProjectPanel project={selectedProject} onClose={handleClosePanel} />
+
+      {/* Welcome Popup */}
+      <WelcomePopup />
     </div>
   );
 }
