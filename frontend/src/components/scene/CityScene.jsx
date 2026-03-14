@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
-import { Stars } from '@react-three/drei';
+import { Suspense, useState } from 'react';
+import { Stars, PerformanceMonitor } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import Building from './Building';
 import Ground from './Ground';
@@ -19,14 +19,18 @@ const PARTICLES = Array.from({ length: 25 }, (_, i) => {
 });
 
 export default function CityScene({ projects, onBuildingClick, selectedProject, scrollProgress }) {
+  const [dpr, setDpr] = useState(1);
+
   return (
     <Canvas
       className="r3f-canvas"
       shadows
+      dpr={dpr}
       camera={{ position: [0, 8, 20], fov: 60, near: 0.1, far: 300 }}
-      gl={{ antialias: true, alpha: false }}
+      gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       style={{ background: '#030712' }}
     >
+      <PerformanceMonitor onChange={({ factor }) => setDpr(Math.min(1.5, Math.max(0.7, 1.5 * factor)))} />
       <color attach="background" args={['#030712']} />
       <fog attach="fog" args={['#030712', 35, 90]} />
 

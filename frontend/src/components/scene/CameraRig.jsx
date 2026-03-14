@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { Vector3 } from 'three';
+import { Vector3, MathUtils } from 'three';
 
 export default function CameraRig({ target, scrollProgress }) {
   const { camera } = useThree();
@@ -32,10 +32,17 @@ export default function CameraRig({ target, scrollProgress }) {
     }
   }, [scrollProgress, target]);
 
-  useFrame(() => {
-    // Smooth lerp toward target
-    currentPos.current.lerp(targetPos.current, 0.04);
-    currentLookAt.current.lerp(targetLookAt.current, 0.04);
+  useFrame((state, delta) => {
+    // Smooth damp toward target, independent of framerate
+    const smoothFactor = 4;
+    
+    currentPos.current.x = MathUtils.damp(currentPos.current.x, targetPos.current.x, smoothFactor, delta);
+    currentPos.current.y = MathUtils.damp(currentPos.current.y, targetPos.current.y, smoothFactor, delta);
+    currentPos.current.z = MathUtils.damp(currentPos.current.z, targetPos.current.z, smoothFactor, delta);
+
+    currentLookAt.current.x = MathUtils.damp(currentLookAt.current.x, targetLookAt.current.x, smoothFactor, delta);
+    currentLookAt.current.y = MathUtils.damp(currentLookAt.current.y, targetLookAt.current.y, smoothFactor, delta);
+    currentLookAt.current.z = MathUtils.damp(currentLookAt.current.z, targetLookAt.current.z, smoothFactor, delta);
 
     camera.position.copy(currentPos.current);
     camera.lookAt(currentLookAt.current);

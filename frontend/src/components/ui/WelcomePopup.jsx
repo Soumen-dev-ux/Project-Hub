@@ -6,8 +6,8 @@ export default function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Show the popup shortly after the app loads
-    const timer = setTimeout(() => setIsOpen(true), 600);
+    // Show the popup quickly after the app loads
+    const timer = setTimeout(() => setIsOpen(true), 150);
     return () => clearTimeout(timer);
   }, []);
 
@@ -20,7 +20,7 @@ export default function WelcomePopup() {
       opacity: 1,
       transition: {
         staggerChildren: 0.02, // anime.js style fast stagger
-        delayChildren: 0.2,
+        delayChildren: 0.1,
       }
     }
   };
@@ -31,7 +31,7 @@ export default function WelcomePopup() {
       opacity: 1,
       transition: {
         staggerChildren: 0.015, // slightly faster for paragraph words
-        delayChildren: 0.8,
+        delayChildren: 0.4,
       }
     }
   };
@@ -131,7 +131,7 @@ export default function WelcomePopup() {
               onClick={handleClose}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.8, type: 'spring', damping: 20, stiffness: 200 }}
+              transition={{ delay: 0.7, type: 'spring', damping: 20, stiffness: 200 }}
               style={{
                 background: 'linear-gradient(90deg, #00f5ff, #0088ff)',
                 color: '#fff',
