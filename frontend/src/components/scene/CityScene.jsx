@@ -64,7 +64,7 @@ export default function CityScene({ projects, onBuildingClick, selectedProject, 
       {/* Floating neon particles */}
       {PARTICLES.map((p, i) => (
         <mesh key={`p-${i}`} position={p.pos}>
-          <sphereGeometry args={[0.045, 4, 4]} />
+          <sphereGeometry args={[0.045, 3, 3]} />
           <meshBasicMaterial color={p.color} />
         </mesh>
       ))}

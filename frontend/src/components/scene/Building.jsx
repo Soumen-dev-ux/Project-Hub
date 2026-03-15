@@ -179,13 +179,13 @@ export default function Building({ project, onClick, isSelected }) {
           );
         })}  {/* ── Glow ring at base ────────────────────────────────── */}
         <mesh ref={glowRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
-          <ringGeometry args={[ringR * 0.7, ringR * 1.55, 32]} />
+          <ringGeometry args={[ringR * 0.7, ringR * 1.55, 16]} />
           <meshBasicMaterial color={palette.emissive} transparent opacity={0} />
         </mesh>
 
         {/* ── Hologram detail ring ─────────────────────────────── */}
         <mesh position={[0, height * 0.8, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[Math.max(width, depth) * 1.2, Math.max(width, depth) * 1.25, 32]} />
+          <ringGeometry args={[Math.max(width, depth) * 1.2, Math.max(width, depth) * 1.25, 16]} />
           <meshBasicMaterial color={palette.emissive} transparent opacity={0.2} side={2} />
         </mesh>
 
@@ -194,8 +194,8 @@ export default function Building({ project, onClick, isSelected }) {
           <pointLight
             position={[0, height + 0.8, 0]}
             color={palette.emissive}
-            intensity={4}
-            distance={9}
+            intensity={3}
+            distance={6}
             decay={2}
           />
         )}

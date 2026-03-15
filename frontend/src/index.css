@@ -64,6 +64,8 @@ body,
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--dark-border);
   border-radius: 16px;
+  will-change: transform, opacity;
+  transform: translateZ(0); 
 }
 
 .glass-strong {
@@ -72,6 +74,8 @@ body,
   -webkit-backdrop-filter: blur(32px) saturate(200%);
   border: 1px solid rgba(0, 245, 255, 0.25);
   border-radius: 20px;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 /* ─── Neon Glow Utilities ────────────────────────────────────── */
@@ -253,6 +257,7 @@ body,
   width: 100vw !important;
   height: 100vh !important;
   z-index: 0;
+  contain: strict; /* Stops repaints from bubbling up */
 }
 
 /* ─── Overlay above canvas ───────────────────────────────────── */
@@ -261,6 +266,7 @@ body,
   inset: 0;
   z-index: 10;
   pointer-events: none;
+  contain: strict; /* High-performance layout containment for the overlay */
 }
 
 .ui-overlay>* {
