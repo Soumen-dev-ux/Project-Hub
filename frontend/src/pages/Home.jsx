@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import CityScene from '../components/scene/CityScene';
 import ProjectPanel from '../components/ui/ProjectPanel';
 import Loader from '../components/ui/Loader';
+import { AnimatePresence } from 'framer-motion';
 import { useProjects } from '../hooks/useProjects';
 import WelcomePopup from '../components/ui/WelcomePopup';
 
@@ -54,8 +55,6 @@ export default function Home() {
 
   const handleClosePanel = () => setSelectedProject(null);
 
-  if (loading) return <Loader />;
-
   if (error) return (
     <div style={{
       display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -82,11 +81,17 @@ export default function Home() {
         scrollProgress={scrollProgress}
       />
 
+      <AnimatePresence>
+        {loading && <Loader />}
+      </AnimatePresence>
+
       {/* HUD overlay — pointer-events: none so canvas is clickable underneath */}
       <div
         style={{
           position: 'fixed', inset: 0, zIndex: 10,
           pointerEvents: 'none',
+          opacity: loading ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out',
         }}
       >
         {/* Bottom left project count */}

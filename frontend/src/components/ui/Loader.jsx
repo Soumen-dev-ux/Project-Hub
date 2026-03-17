@@ -4,7 +4,10 @@ import { motion } from 'framer-motion';
 
 export default function Loader() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       style={{
         position: 'fixed', inset: 0,
         background: '#030712',
@@ -37,6 +40,6 @@ export default function Loader() {
       >
         LOADING CITY...
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
