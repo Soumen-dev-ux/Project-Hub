@@ -319,7 +319,7 @@ body,
   position: fixed;
   top: 90px;
   left: 24px;
-  width: min(560px, calc(100vw - 32px));
+  width: min(720px, calc(100vw - 48px));
   aspect-ratio: 16 / 9;
   z-index: 30;
   border-radius: 16px;
@@ -349,7 +349,7 @@ body,
 
   /* On slight narrow screens, shrink video slightly so it doesn't overlap text */
   .video-panel-container {
-    width: min(450px, calc(100vw - 32px));
+    width: min(540px, calc(100vw - 32px));
   }
 }
 
