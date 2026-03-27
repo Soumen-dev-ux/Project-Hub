@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Project = require('../models/Project');
+const auth = require('../middleware/auth');
 
 // GET all projects
 router.get('/', async (req, res) => {
@@ -23,8 +24,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST create new project
-router.post('/', async (req, res) => {
+// POST create new project (protected)
+router.post('/', auth, async (req, res) => {
   const project = new Project({
     title: req.body.title,
     description: req.body.description,
@@ -42,8 +43,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT update project
-router.put('/:id', async (req, res) => {
+// PUT update project (protected)
+router.put('/:id', auth, async (req, res) => {
   try {
     const updated = await Project.findByIdAndUpdate(
       req.params.id,
@@ -57,8 +58,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE project
-router.delete('/:id', async (req, res) => {
+// DELETE project (protected)
+router.delete('/:id', auth, async (req, res) => {
   try {
     const deleted = await Project.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Project not found' });

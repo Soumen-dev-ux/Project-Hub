@@ -18,7 +18,9 @@ mongoose
 
 // Routes
 const projectRoutes = require('./routes/projects');
+const authRoutes = require('./routes/auth');
 app.use('/api/projects', projectRoutes);
+app.use('/api/auth', authRoutes);
 
 // Health check
 app.get('/', (req, res) => {

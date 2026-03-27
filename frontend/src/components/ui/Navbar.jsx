@@ -65,6 +65,27 @@ export default function Navbar() {
             </Link>
           );
         })}
+
+        {/* Admin shortcut */}
+        <Link to="/admin" style={{ textDecoration: 'none' }}>
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 5,
+              padding: '5px 12px', borderRadius: 8,
+              background: pathname.startsWith('/admin')
+                ? 'rgba(0,245,255,0.12)'
+                : 'rgba(255,255,255,0.04)',
+              border: `1px solid ${pathname.startsWith('/admin') ? 'rgba(0,245,255,0.35)' : 'rgba(255,255,255,0.08)'}`,
+              color: pathname.startsWith('/admin') ? '#00f5ff' : 'rgba(226,232,240,0.4)',
+              fontSize: '0.72rem', fontFamily: 'JetBrains Mono, monospace',
+              letterSpacing: '0.1em', cursor: 'pointer',
+              transition: 'all 0.2s',
+            }}
+          >
+            ⚙ ADMIN
+          </motion.span>
+        </Link>
       </div>
 
       {/* Status dot */}

@@ -6,6 +6,6 @@ const api = axios.create({
 });
 
 export const getProjects = () => api.get('/projects');
-export const createProject = (data) => api.post('/projects', data);
-export const updateProject = (id, data) => api.put(`/projects/${id}`, data);
-export const deleteProject = (id) => api.delete(`/projects/${id}`);
+export const createProject = (data, config) => api.post('/projects', data, config);
+export const updateProject = (id, data, config) => api.put(`/projects/${id}`, data, config);
+export const deleteProject = (id, config) => api.delete(`/projects/${id}`, config);
